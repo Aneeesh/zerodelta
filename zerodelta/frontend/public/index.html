@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZeroDelta – India's Premier Paper Trading Platform</title>
+<meta name="description" content="Paper trade Nifty 50, Sensex, Gold & Silver ETFs with 10L virtual capital.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="login-page" class="page active">
+  <div class="login-bg"></div>
+  <div class="login-grid"></div>
+  <div class="login-left">
+    <div class="brand-logo">
+      <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="url(#lg1)"/><path d="M10 32L18 20L24 26L32 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="12" r="3" fill="#00e5a0"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop stop-color="#1a3a5c"/><stop offset="1" stop-color="#0d1f33"/></linearGradient></defs></svg>
+      <span class="brand-name">ZeroDelta</span>
+    </div>
+    <h1 class="hero-h">Trade India's Markets.<br><span>Risk-Free.</span></h1>
+    <p class="hero-p">Paper trade Nifty 50, Sensex, Bank Nifty, Gold &amp; Silver ETFs with Rs.10 Lakh virtual capital. AI-powered predictions. Real-time prices. Zero risk.</p>
+    <div class="pills">
+      <div class="pill"><span class="pill-dot"></span>Rs.10L Virtual Capital</div>
+      <div class="pill"><span class="pill-dot"></span>Nifty 50 All Stocks</div>
+      <div class="pill"><span class="pill-dot"></span>Gold &amp; Silver ETFs</div>
+      <div class="pill"><span class="pill-dot"></span>Candlestick Charts</div>
+      <div class="pill"><span class="pill-dot"></span>AI Predictor</div>
+      <div class="pill"><span class="pill-dot"></span>Zero Risk</div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="lcard fade-up">
+      <h2>Welcome Back</h2>
+      <p class="lsub">Sign in to your trading account</p>
+      <div class="tab-sw">
+        <button class="tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="tab-btn" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+      </div>
+      <div class="auth-error" id="auth-error"></div>
+      <!-- LOGIN -->
+      <div id="form-login">
+        <div class="form-group"><label>Email Address</label><input class="form-input" type="email" id="login-email" placeholder="you@example.com" value="demo@zerodelta.in"></div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input class="form-input" type="password" id="login-pass" placeholder="Enter password" value="demo1234">
+            <button class="pw-eye" type="button" onclick="togglePw('login-pass',this)">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In to Trade</button>
+        <div class="divider">demo credentials pre-filled</div>
+        <div class="demo-hint"><strong>demo@zerodelta.in</strong> &nbsp;/&nbsp; <strong>demo1234</strong></div>
+      </div>
+      <!-- REGISTER -->
+      <div id="form-register" class="hide">
+        <div class="grid-2c">
+          <div class="form-group"><label>First Name</label><input class="form-input" type="text" id="reg-fname" placeholder="Arjun"></div>
+          <div class="form-group"><label>Last Name</label><input class="form-input" type="text" id="reg-lname" placeholder="Sharma"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input class="form-input" type="email" id="reg-email" placeholder="you@example.com"></div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input class="form-input" type="password" id="reg-pass" placeholder="Min. 6 characters">
+            <button class="pw-eye" type="button" onclick="togglePw('reg-pass',this)">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-group"><label>Mobile</label><input class="form-input" type="tel" id="reg-mobile" placeholder="+91 98765 43210"></div>
+        <button class="btn-primary" id="reg-btn" onclick="doRegister()">Create Free Account</button>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">By signing up you agree to our Terms &amp; Privacy Policy.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ticker-strip"><div class="ticker-track" id="ticker-track"></div></div>
+</div>
+
+<!-- APP PAGE -->
+<div id="app-page" class="page">
+  <div class="topbar">
+    <div class="topbar-brand">
+      <svg width="26" height="26" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="9" fill="url(#lg2)"/><path d="M10 32L18 20L24 26L32 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="12" r="3" fill="#00e5a0"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop stop-color="#1a3a5c"/><stop offset="1" stop-color="#0d1f33"/></linearGradient></defs></svg>
+      <span class="bn">ZeroDelta</span>
+    </div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" onclick="showSection('dashboard',this)">Dashboard</button>
+      <button class="nav-tab" onclick="showSection('markets',this)">Markets</button>
+      <button class="nav-tab" onclick="showSection('portfolio',this)">Portfolio</button>
+      <button class="nav-tab" onclick="showSection('predictor',this)">AI Predictor</button>
+      <button class="nav-tab" onclick="showSection('orders',this)">Orders</button>
+    </nav>
+    <div class="topbar-right">
+      <span style="font-size:11px;color:var(--text2);display:flex;align-items:center;"><span class="live-dot"></span>Live</span>
+      <input class="search-bar" type="text" placeholder="Search stocks..." oninput="handleSearch(this.value)" id="top-search">
+      <div class="pbadge"><span>Portfolio</span><strong id="portfolio-val">Rs.10,00,000</strong></div>
+      <div class="ubtn" id="user-avatar">A</div>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <div class="sb-section"><div class="sb-title">Indices</div><div id="sidebar-indices"></div></div>
+      <div class="sb-section"><div class="sb-title">My Watchlist</div><div id="sidebar-watchlist"></div></div>
+      <div class="sb-section"><div class="sb-title">Gold &amp; Silver ETFs</div><div id="sidebar-etfs"></div></div>
+    </div>
+
+    <div class="main-content" id="main-content"></div>
+
+    <div class="right-panel">
+      <div class="rp-section">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;">Quick Trade</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:11px;" id="sel-stock-name">Select a stock to trade</div>
+        <div class="buy-sell-tabs">
+          <button class="bst buy active" onclick="setTradeMode('buy',this)">BUY</button>
+          <button class="bst sell" onclick="setTradeMode('sell',this)">SELL</button>
+        </div>
+        <div class="trade-info">
+          <div class="trade-row"><span>Symbol</span><span id="tr-sym" class="mono">—</span></div>
+          <div class="trade-row"><span>LTP</span><span id="tr-ltp" class="mono">Rs.—</span></div>
+          <div class="trade-row"><span>Change</span><span id="tr-chg" class="mono">—</span></div>
+          <div class="trade-row"><span>Available</span><span id="tr-funds" class="mono">Rs.10,00,000</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:7px;">Quantity</div>
+        <div class="qty-ctl">
+          <button class="q-btn" onclick="changeQty(-1)">-</button>
+          <input class="q-input" type="number" id="qty-input" value="1" min="1" oninput="updateOrderValue()">
+          <button class="q-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <div class="trade-info" style="margin-bottom:12px;">
+          <div class="trade-row"><span>Order Value</span><span id="order-val" class="mono">Rs.—</span></div>
+          <div class="trade-row"><span>Brokerage</span><span class="mono" style="color:var(--text3);">Rs.0 (Paper)</span></div>
+        </div>
+        <button class="exec-btn buy" id="exec-btn" onclick="executeTrade()">Place Buy Order</button>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">Recent Orders</div>
+        <div id="recent-orders-panel"><div style="color:var(--text3);font-size:12px;text-align:center;padding:14px;">No orders yet</div></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-title">Market News</div>
+        <div id="news-panel"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD POSITION MODAL -->
+<div class="modal-overlay" id="modal-add">
+  <div class="modal-box">
+    <div class="modal-header"><h3>Add Position</h3><button class="modal-close" onclick="closeModal('modal-add')">x</button></div>
+    <div class="mfg"><label>Select Instrument</label><select class="mfi" id="ma-sym" onchange="updateAddPreview()" style="cursor:pointer;"></select></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+      <div class="mfg" style="margin-bottom:0;"><label>Order Type</label><select class="mfi" id="ma-type" onchange="updateAddPreview()" style="cursor:pointer;"><option value="buy">BUY (Long)</option><option value="sell">SELL (Short)</option></select></div>
+      <div class="mfg" style="margin-bottom:0;"><label>Quantity</label><input class="mfi" type="number" id="ma-qty" value="1" min="1" oninput="updateAddPreview()"></div>
+    </div>
+    <div class="prev-box" id="add-preview"></div>
+    <div class="modal-btns"><button class="mbtn-cancel" onclick="closeModal('modal-add')">Cancel</button><button class="mbtn-buy" id="add-confirm-btn" onclick="confirmAdd()">Confirm Order</button></div>
+  </div>
+</div>
+
+<!-- EXIT POSITION MODAL -->
+<div class="modal-overlay" id="modal-exit">
+  <div class="modal-box">
+    <div class="modal-header"><h3>Exit Position</h3><button class="modal-close" onclick="closeModal('modal-exit')">x</button></div>
+    <div id="exit-modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
